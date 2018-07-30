@@ -448,8 +448,12 @@ describe('cells/widget', () => {
         return CodeCell.execute(widget, session).then(() => {
           let executionCount = widget.model.executionCount;
           expect(executionCount).to.not.equal(originalCount);
-          expect('timing.execute_reply_started').to.be.ok();
-          expect('timing.execute_reply_sent').to.be.ok();
+          expect(
+            widget.model.metadata.get('timing.execute_reply_started')
+          ).to.be.ok();
+          expect(
+            widget.model.metadata.get('timing.execute_reply_sent')
+          ).to.be.ok();
         });
       });
     });
