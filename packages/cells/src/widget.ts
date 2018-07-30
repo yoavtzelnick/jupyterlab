@@ -800,6 +800,10 @@ export namespace CodeCell {
     return OutputArea.execute(code, cell.outputArea, session)
       .then(msg => {
         model.executionCount = msg.content.execution_count;
+        model.metadata.set('timing.execute_reply_started', msg.metadata
+          .started as string);
+        model.metadata.set('timing.execute_reply_sent', msg.header
+          .date as string);
         return msg;
       })
       .catch(e => {
